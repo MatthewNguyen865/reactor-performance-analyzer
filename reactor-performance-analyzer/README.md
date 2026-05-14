@@ -99,15 +99,15 @@ These plots help engineers understand reactor efficiency and determine required 
 
 # Installation
 
-Clone the repository:
+### Clone the repository:
 
 git clone https://github.com/yourusername/reactor-performance-analyzer.git
 
-Install required packages:
+### Install required packages:
 
 pip install numpy pandas matplotlib
 
-Run the program:
+### Run the program:
 
 python main.py
 
