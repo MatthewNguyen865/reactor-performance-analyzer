@@ -115,6 +115,7 @@ python main.py
 
 # Project Structure
 
+```
 reactor-performance-analyzer/
 |
 |--- main.py
@@ -122,6 +123,7 @@ reactor-performance-analyzer/
 |--- plotting.py
 |--- README.md
 |--- requirements.txt
+```
 
 ---
 
