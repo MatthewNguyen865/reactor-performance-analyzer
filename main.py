@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from metrics import compute_conversion
 from plotting import plot_conversion
 from data_extractor import load_data
 
@@ -7,16 +8,16 @@ from data_extractor import load_data
 time, CA_in, CA_out = load_data("data.csv")
 
 #compute conversion, reactor performance
-#baseline
-conversion_base = (CA_in - CA_out)/CA_in
+# baseline
+conversion_base = compute_conversion(CA_in, CA_out)
 
-#faster reaction (simulate by decreasing CA_out)
+# fast reaction scenario
 CA_out_fast = CA_out * 0.8
-conversion_fast = (CA_in - CA_out_fast)/CA_in
+conversion_fast = compute_conversion(CA_in, CA_out_fast)
 
-#slower reaction (simulate by increasing CA_out)
+# slow reaction scenario
 CA_out_slow = CA_out * 1.2
-conversion_slow = (CA_in - CA_out_slow)/CA_in
+conversion_slow = compute_conversion(CA_in, CA_out_slow)
 
 #plot results
 all_values = np.concatenate([conversion_base, conversion_fast, conversion_slow])
