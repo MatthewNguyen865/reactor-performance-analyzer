@@ -41,3 +41,23 @@ def plot_reaction_rate(time, rates, labels):
     plt.savefig("example_plots/reaction_rate_plot.png", dpi=300)
 
     plt.show()
+
+def plot_average_conversion(labels, conversions):
+
+    average_conversions = []
+
+    for conversion in conversions:
+        average_conversions.append(np.mean(conversion))
+
+    plt.figure()
+
+    plt.bar(labels, average_conversions)
+
+    plt.ylabel("Average Conversion")
+    plt.title("Average Reactor Conversion by Scenario")
+
+    plt.grid(True, axis="y")
+
+    plt.savefig("example_plots/average_conversion.png", dpi=300)
+
+    plt.show()
