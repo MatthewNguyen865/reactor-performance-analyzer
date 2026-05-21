@@ -18,6 +18,8 @@ def plot_conversion(time, y_upper_lim, conversions, labels):
     plt.ylim(0, y_upper_lim)
     plt.grid(True)
 
+    plt.savefig("example_plots/conversion_plot.png", dpi=300)
+
     plt.show()
 
 def plot_reaction_rate(time, rates, labels):
@@ -35,5 +37,7 @@ def plot_reaction_rate(time, rates, labels):
     plt.title("Reaction Rate Over Time")
     plt.legend()
     plt.grid(True)
+
+    plt.savefig("example_plots/reaction_rate_plot.png", dpi=300)
 
     plt.show()
