@@ -19,3 +19,21 @@ def plot_conversion(time, y_upper_lim, conversions, labels):
     plt.grid(True)
 
     plt.show()
+
+def plot_reaction_rate(time, rates, labels):
+    """
+    time: array of time values
+    rates: list of reaction rate arrays
+    labels: list of names for each curve
+    """
+
+    for i in range(len(rates)):
+        plt.plot(time, rates[i], label=labels[i])
+
+    plt.ylabel("Reaction Rate")
+    plt.xlabel("Time")
+    plt.title("Reaction Rate Over Time")
+    plt.legend()
+    plt.grid(True)
+
+    plt.show()
