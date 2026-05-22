@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
+from config import OUTPUT_DIR
+import os
 
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def average_conversion(conversion):
     return np.mean(conversion)
@@ -44,7 +47,7 @@ def export_summary_csv(
         labels,
         conversions,
         reaction_rates,
-        filename="output/reactor_summary.csv"):
+        filename=f"{OUTPUT_DIR}/reactor_summary.csv"):
 
     summary_data = []
 
