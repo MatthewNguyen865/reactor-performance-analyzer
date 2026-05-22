@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from config import PLOT_DIR
 import os
+from config import PLOT_DIR
 
-os.makedirs(PLOT_DIR, exist_ok=True)
+def ensure_plot_dir():
+    os.makedirs(PLOT_DIR, exist_ok=True)
 
 def set_plot_style():
     plt.rcParams.update({
@@ -28,7 +29,6 @@ def set_plot_style():
     })
 
 def plot_conversion(time, y_upper_lim, conversions, labels):
-    set_plot_style()
     """
     time: array of time values
     conversions: list of conversion arrays
@@ -46,12 +46,12 @@ def plot_conversion(time, y_upper_lim, conversions, labels):
     plt.grid(True)
 
     plt.tight_layout()
+    ensure_plot_dir()
     plt.savefig(f"{PLOT_DIR}/conversion_plot.png", dpi=300)
 
     plt.show()
 
 def plot_reaction_rate(time, rates, labels):
-    set_plot_style()
     """
     time: array of time values
     rates: list of reaction rate arrays
@@ -68,12 +68,12 @@ def plot_reaction_rate(time, rates, labels):
     plt.grid(True)
 
     plt.tight_layout()
+    ensure_plot_dir()
     plt.savefig(f"{PLOT_DIR}/reaction_rate_plot.png", dpi=300)
 
     plt.show()
 
 def plot_average_conversion(labels, conversions):
-    set_plot_style()
 
     average_conversions = []
 
@@ -90,6 +90,7 @@ def plot_average_conversion(labels, conversions):
     plt.grid(True, axis="y")
 
     plt.tight_layout()
+    ensure_plot_dir()
     plt.savefig(f"{PLOT_DIR}/average_conversion_comparison.png", dpi=300)
 
     plt.show()
