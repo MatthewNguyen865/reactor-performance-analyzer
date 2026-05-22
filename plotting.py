@@ -58,6 +58,6 @@ def plot_average_conversion(labels, conversions):
 
     plt.grid(True, axis="y")
 
-    plt.savefig("example_plots/average_conversion.png", dpi=300)
+    plt.savefig("example_plots/average_conversion_comparison.png", dpi=300)
 
     plt.show()

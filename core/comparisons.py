@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 
 def average_conversion(conversion):
@@ -38,3 +39,37 @@ def summarize_scenarios(
         print(f"Peak Conversion: {peak_conv:.3f}")
         print(f"Average Reaction Rate: {avg_rate:.3f}")
         print(f"Peak Reaction Rate: {peak_rate:.3f}")
+
+def export_summary_csv(
+        labels,
+        conversions,
+        reaction_rates,
+        filename="output/reactor_summary.csv"):
+
+    summary_data = []
+
+    for i in range(len(labels)):
+
+        scenario_data = {
+            "Scenario": labels[i],
+
+            "Average Conversion":
+                np.mean(conversions[i]),
+
+            "Peak Conversion":
+                np.max(conversions[i]),
+
+            "Average Reaction Rate":
+                np.mean(reaction_rates[i]),
+
+            "Peak Reaction Rate":
+                np.max(reaction_rates[i])
+        }
+
+        summary_data.append(scenario_data)
+
+    summary_df = pd.DataFrame(summary_data)
+
+    summary_df.to_csv(filename, index=False)
+
+    print(f"Summary exported to {filename}")

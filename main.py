@@ -3,7 +3,7 @@ import numpy as np
 from core.metrics import compute_conversion, compute_reaction_rate
 from plotting import plot_conversion, plot_reaction_rate, plot_average_conversion
 from core.data_extractor import load_data
-from core.comparisons import summarize_scenarios
+from core.comparisons import summarize_scenarios, export_summary_csv
 from data_generator import generate_dataset
 
 #generate and load data
@@ -58,9 +58,15 @@ plot_average_conversion(
 summarize_scenarios(
     labels,
     [conversion_base, conversion_fast, conversion_slow],
-    [
-        compute_reaction_rate(CA_out_base, time),
-        compute_reaction_rate(CA_out_fast, time),
-        compute_reaction_rate(CA_out_slow, time)
-    ]
+    [compute_reaction_rate(CA_out_base, time),
+    compute_reaction_rate(CA_out_fast, time),
+    compute_reaction_rate(CA_out_slow, time)]
+)
+
+export_summary_csv(
+    labels,
+    [conversion_base, conversion_fast, conversion_slow],
+    [compute_reaction_rate(CA_out_base, time),
+    compute_reaction_rate(CA_out_fast, time),
+    compute_reaction_rate(CA_out_slow, time)]
 )
