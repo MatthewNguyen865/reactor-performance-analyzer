@@ -3,7 +3,8 @@ import pandas as pd
 from config import OUTPUT_DIR
 import os
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+def ensure_output_dir():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def average_conversion(conversion):
     return np.mean(conversion)
@@ -29,15 +30,15 @@ def summarize_scenarios(
     print("\nReactor Performance Summary")
     print("-" * 40)
 
-    for i in range(len(labels)):
+    for label, conversion, rate in zip(labels, conversions, reaction_rates):
 
-        avg_conv = average_conversion(conversions[i])
-        peak_conv = peak_conversion(conversions[i])
+        avg_conv = average_conversion(conversion)
+        peak_conv = peak_conversion(conversion)
 
-        avg_rate = average_reaction_rate(reaction_rates[i])
-        peak_rate = peak_reaction_rate(reaction_rates[i])
+        avg_rate = average_reaction_rate(rate)
+        peak_rate = peak_reaction_rate(rate)
 
-        print(f"\nScenario: {labels[i]}")
+        print(f"\nScenario: {label}")
         print(f"Average Conversion: {avg_conv:.3f}")
         print(f"Peak Conversion: {peak_conv:.3f}")
         print(f"Average Reaction Rate: {avg_rate:.3f}")
@@ -51,28 +52,29 @@ def export_summary_csv(
 
     summary_data = []
 
-    for i in range(len(labels)):
+    for label, conversion, rate in zip(labels, conversions, reaction_rates):
 
         scenario_data = {
-            "Scenario": labels[i],
+            "Scenario": label,
 
             "Average Conversion":
-                np.mean(conversions[i]),
+                np.mean(conversion),
 
             "Peak Conversion":
-                np.max(conversions[i]),
+                np.max(conversion),
 
             "Average Reaction Rate":
-                np.mean(reaction_rates[i]),
+                np.mean(rate),
 
             "Peak Reaction Rate":
-                np.max(reaction_rates[i])
+                np.max(rate)
         }
 
         summary_data.append(scenario_data)
 
     summary_df = pd.DataFrame(summary_data)
 
+    ensure_output_dir()
     summary_df.to_csv(filename, index=False)
 
     print(f"Summary exported to {filename}")
