@@ -4,6 +4,7 @@ from plotting import plot_conversion, plot_reaction_rate, plot_average_conversio
 from core.data_extractor import load_data
 from core.comparisons import summarize_scenarios, export_summary_csv
 from data_generator import generate_dataset
+from core.statistics import percent_improvement, rank_scenarios
 
 #generate and load data
 #Note: plots in README.md and data in data.csv use seed = 1
@@ -71,3 +72,17 @@ export_summary_csv(
     conversions,
     reaction_rates
 )
+
+#ranking scenarios
+ranking = rank_scenarios(labels, conversions)
+
+print("\nScenario Ranking (by Avg Conversion):")
+for name, value in ranking:
+    print(f"{name}: {value:.3f}")
+
+print("\nPercent Improvement vs Base:")
+
+for i in range(len(labels)):
+    if labels[i] != "Base":
+        improvement = percent_improvement(conversions[0], conversions[i])
+        print(f"{labels[i]}: {improvement:.2f}%")
